@@ -1,0 +1,37 @@
+---
+title: "CRIM 5** Project or Exercise 1"
+author: "My Name"
+date: "`r format(Sys.time(), '%d %B %Y')`"
+output: html_document
+---
+
+# Libraries
+```{r, message=FALSE}
+library(tidyverse)
+```
+
+```{r, echo=FALSE}
+calls <- read.csv(sprintf("https://docs.google.com/uc?id=%s&export=download",
+                          "12PArV_t_kvonL098R6zSQt6PSTmP1GMt"))
+calls$date <- as.Date(calls$date)
+calls$month <- months(calls$date)
+calls$month2 <- month(calls$date)
+calls$dow <- weekdays(calls$date)
+calls.random <- subset(calls, calls$type == 'NOISE COMPLAINT' | calls$type == 'TOW' |
+                         calls$type == 'OVERDOSE' | calls$type == 'TRAFFIC STOP')
+```
+
+# Graph 1
+```{r, echo=FALSE}
+ggplot(calls.random, aes(type)) + geom_bar(stat = 'count', aes(fill = month)) +
+  ggtitle("Select Call Types since 2008, by Month")
+```
+
+# Graph 2
+```{r, echo=FALSE, warning=FALSE}
+ggplot(calls.random, aes(hour)) + geom_bar(stat = 'count',
+                                           position = position_stack(reverse = TRUE)) +
+  theme_classic() + theme(legend.position = "right") +
+  facet_wrap(~year) + ggtitle("Select Call Types since 2008 by Hour and Year")
+```
+

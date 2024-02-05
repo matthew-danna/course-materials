@@ -26,7 +26,7 @@ These are different heading styles. When you 'knit' this template, you see how t
 
 ### *Italics*
 ### **Bold**
-### ***Bold Italicized**
+### ***Bold Italicized***
 
 1. Numbered
 2. List
