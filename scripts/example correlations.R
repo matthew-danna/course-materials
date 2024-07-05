@@ -1,6 +1,6 @@
 install.packages('corrr')
-library(corrr)
 install.packages('corrplot')
+library(corrr)
 library(corrplot)
 
 # Create a summary table of counts
