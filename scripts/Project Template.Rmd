@@ -53,6 +53,8 @@ See how the chunk of code above doesn't show up in the knitted output? It's magi
 ```{r}
 #install.packages('tidyverse')
 library(tidyverse)
+#install.packages('formatdown')
+library(formatdown)
 ```
 **NOTE:** *Never ever ever include any install.packages functions.* Either comment them out with a #, or delete them.
 
@@ -87,6 +89,24 @@ This can be the place where math is done. **Wrangle** and **Calculate** can ofte
 # yep, more code, but with graphs
 ```
 A place for graphs, maps, etc.
+
+## Quick Example
+```{r}
+# Data set included in formatdown
+data("metals")
+
+# Extract two columns (data.table syntax)
+DT <- metals[, .(metal, elast_mod)]
+
+# Format one column
+DT$elast_mod <- format_numbers(DT$elast_mod, digits = 3, format = "engr")
+# Format the text column
+DT$metal <- format_text(DT$metal)
+
+# Display the table
+knitr::kable(DT, col.names = c("metal", "modulus (Pa)"))
+```
+
 
 # ANALYTICS
 Insert text here for your actual findings and results. You can also insert text above/below visualizations along the way.
