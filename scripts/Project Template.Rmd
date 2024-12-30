@@ -25,7 +25,7 @@ And you'll get a new style.
 
 If you want to experiment further, swap out the **markdown-modest** theme. Here are other markdown themes to try:
 
-    “almond”, “awsm.css”, “axist”, “bamboo”, “bullframe”, “holiday”, “kacit”, “latex.css”, “markdown-splendor”, “markdown-retro”, “markdown-air”, “markdown-modest”, “marx”, “minicss”, “new.css”, “no-class”, “picocss”, “sakura”, “sakura-vader”, “semantic”, “simplecss”, “style-sans”, “style-serif”, “stylize”, “superstylin”, “tacit”, “vanilla”, “water”, “water-dark”, “writ”
+    “almond”, “awsm.css”, “axist”, “bamboo”, “bullframe”, "cayman", “holiday”, “kacit”, “latex.css”, “markdown-splendor”, “markdown-retro”, “markdown-air”, “markdown-modest”, “marx”, “minicss”, “new.css”, “no-class”, “picocss”, “sakura”, “sakura-vader”, “semantic”, “simplecss”, “style-sans”, “style-serif”, “stylize”, “superstylin”, “tacit”, “vanilla”, “water”, “water-dark”, “writ”
 
 # Formatting
 
