@@ -11,7 +11,7 @@
 
 <meta name="author" content="Your Name" />
 
-<meta name="date" content="2024-09-09" />
+<meta name="date" content="2024-12-30" />
 
 <title>Course Name Course Number Project Template</title>
 
@@ -353,11 +353,42 @@ display: none;
 <h1 class="title toc-ignore">Course Name Course Number Project
 Template</h1>
 <h4 class="author">Your Name</h4>
-<h4 class="date">09 September 2024</h4>
+<h4 class="date">30 December 2024</h4>
 
 </div>
 
 
+<div id="welcome" class="section level1">
+<h1>Welcome!</h1>
+<p>When you first load this file, you’ll notice a banner across the top
+about packages needing to be installed. Click <strong>install</strong> -
+this will save you extra coding steps later.</p>
+<p><em>Whenever you want to see what this output looks like</em>,
+<strong>click the ‘Knit’ button.</strong> The output file, which is an
+<strong>.HTML</strong> file, will be saved to the same folder this
+script is saved to. You’ll notice the file name in the top left of the
+output window, too.</p>
+</div>
+<div id="themes" class="section level1">
+<h1>Themes</h1>
+<p>The first section, lines 1-6, is the header. This is the basic
+version. If you’d like something fancier, you can experiment with
+styles. Specifically, change the <strong>output</strong> section to
+something like this:</p>
+<pre><code>output: 
+  cleanrmd::html_document_clean:
+    theme: markdown-modest
+    toc: yes
+    toc_float: 
+    collapsed: true</code></pre>
+<p>And you’ll get a new style.</p>
+<p>If you want to experiment further, swap out the
+<strong>markdown-modest</strong> theme. Here are other markdown themes
+to try:</p>
+<pre><code>“almond”, “awsm.css”, “axist”, “bamboo”, “bullframe”, “holiday”, “kacit”, “latex.css”, “markdown-splendor”, “markdown-retro”, “markdown-air”, “markdown-modest”, “marx”, “minicss”, “new.css”, “no-class”, “picocss”, “sakura”, “sakura-vader”, “semantic”, “simplecss”, “style-sans”, “style-serif”, “stylize”, “superstylin”, “tacit”, “vanilla”, “water”, “water-dark”, “writ”</code></pre>
+</div>
+<div id="formatting" class="section level1">
+<h1>Formatting</h1>
 <p>Here’s a collection of text formatting/styling things you may (or may
 not) care about. Copy them, use them, or delete them, just don’t leave
 all of this here when you submit your project…</p>
@@ -371,6 +402,7 @@ useful when you want to cite something, without providing the URL in the
 text.</p>
 <p>These are different heading styles. When you ‘knit’ this template,
 you see how they differ:</p>
+</div>
 <div id="heading-1" class="section level1">
 <h1>Heading 1</h1>
 <div id="heading-2" class="section level2">
@@ -407,19 +439,16 @@ you see how they differ:</p>
 <li>like this</li>
 <li>or this</li>
 </ul>
-<p><em>When you are ready to see what the output looks like</em>,
-<strong>click the ‘Knit’ button.</strong> The output file will be saved
-to the same folder this script is saved to.</p>
 </div>
 </div>
 </div>
-<div id="example-section" class="section level1">
-<h1>Example Section</h1>
+<div id="hiding-code" class="section level1">
+<h1>Hiding Code</h1>
 <p>See how the chunk of code above doesn’t show up in the knitted
 output? It’s magic, really.</p>
 </div>
-<div id="packages" class="section level1">
-<h1>PACKAGES</h1>
+<div id="running-packages" class="section level1">
+<h1>Running Packages</h1>
 <pre class="r"><code>#install.packages(&#39;tidyverse&#39;)
 library(tidyverse)</code></pre>
 <pre><code>## ── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
@@ -441,35 +470,8 @@ delete them.</p>
 <p>Also, if we had used the message=FALSE here, all that extra stuff
 would not have displayed in the knit.</p>
 </div>
-<div id="sources" class="section level1">
-<h1>SOURCES</h1>
-<pre class="r"><code># Data source link here</code></pre>
-<p>A completely optional section for any data source references.</p>
-<div id="acquire-data" class="section level2">
-<h2>Acquire Data</h2>
-<pre class="r"><code># Code here</code></pre>
-<p>Often, this is the section where you include how you got the
-data.</p>
-</div>
-<div id="wrangle-data" class="section level2">
-<h2>Wrangle Data</h2>
-<pre class="r"><code># more code here</code></pre>
-<p>This is typically where any processing, extracting, and/or formatting
-occurs.</p>
-</div>
-<div id="calculate-data" class="section level2">
-<h2>Calculate Data</h2>
-<pre class="r"><code># more code</code></pre>
-<p>This can be the place where math is done. <strong>Wrangle</strong>
-and <strong>Calculate</strong> can often be one section, too.</p>
-</div>
-<div id="visualize-data" class="section level2">
-<h2>Visualize Data</h2>
-<pre class="r"><code># yep, more code, but with graphs</code></pre>
-<p>A place for graphs, maps, etc.</p>
-</div>
-<div id="quick-example" class="section level2">
-<h2>Quick Example</h2>
+<div id="example" class="section level1">
+<h1>Example</h1>
 <pre class="r"><code># Data set included in formatdown
 data(&quot;metals&quot;)
 
@@ -524,16 +526,22 @@ knitr::kable(DT, col.names = c(&quot;metal&quot;, &quot;modulus (Pa)&quot;))</co
 </tbody>
 </table>
 </div>
-</div>
-<div id="analytics" class="section level1">
-<h1>ANALYTICS</h1>
-<p>Insert text here for your actual findings and results. You can also
-insert text above/below visualizations along the way.</p>
+<div id="recommended-workflow" class="section level1">
+<h1>Recommended Workflow</h1>
+<ol style="list-style-type: decimal">
+<li>Create a new, blank .R file for each project.</li>
+<li>Use this file to build all the things you need for a project,
+including examples from class and instructions.</li>
+<li>Create a .Rmd file (or <em>Save As</em> this file as a
+start-point).</li>
+<li>Copy/paste only the content you need from the .R file to the .Rmd
+file.</li>
+<li>Test, edit, proofread, knit, submit the output to Canvas.</li>
+</ol>
 <p><strong>NOTE:</strong> When submitting your projects, you are
-submitting either an <strong>HTML</strong> or <strong>PDF</strong>
-output of your Markdown file. Blackboard does not accept HTML files, so
-if you go that route (<em>and I recommend it, really</em>), <a href="mailto:mdanna2@gmu.edu">email me</a> a copy of your final
-submission.</p>
+submitting an <strong>HTML</strong> output of your Markdown file. You
+will never ever ever submit the .Rmd fie - you are submitting the
+knitted out of the .Rmd file.</p>
 </div>
 
 
