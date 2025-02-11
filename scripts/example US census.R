@@ -11,30 +11,30 @@ library(tidycensus)
 census_api_key("YOUR API KEY GOES HERE", install = TRUE, overwrite = TRUE)
 
 # find Census variables
-variables <- load_variables(2022, "acs5", cache = TRUE)
+variables <- load_variables(2023, "acs5", cache = TRUE)
 # just the totals
 variables.totals <- subset(variables, variables$label == 'Estimate!!Total:')
 
 ##### SAMPLE QUERIES
-# 2022 total population by state:
-pop22 <- get_acs(geography = "state",
+# 2023 total population by state:
+pop23 <- get_acs(geography = "state",
                  variables = "B01003_001", 
-                 year = 2022)
+                 year = 2024)
 
-# 2022 total population by metropolitan statistical area:
-pop.msa.22 <- get_acs(geography = "metropolitan statistical area/micropolitan statistical area",
+# 2023 total population by metropolitan statistical area:
+pop.msa.23 <- get_acs(geography = "metropolitan statistical area/micropolitan statistical area",
                       variables = "B01003_001",
-                      year = 2022)
+                      year = 2023)
 
-# 2022 population by race by MSA:
+# 2023 population by race by MSA:
 msa.race <- get_acs(geography = "metropolitan statistical area/micropolitan statistical area",
                     variables = c("B02008_001", "B02009_001", "B02010_001", "B02011_001"),
-                    year = 2022)
+                    year = 2023)
 
 # 2022 ‘component’ datasets by state:
 # The variables included in the components of change product consist of both estimates of counts and rates. 
 # Rates are preceded by an R in the variable name and are calculated per 1000 residents.
-state_components <- get_estimates(geography = "state", product = "components")
+state_components <- get_estimates(geography = "state", product = "components", year = 2022)
 # 2022 ‘component’ datasets by MSA:
 msa_components <- get_estimates(geography = "metropolitan statistical area/micropolitan statistical area", 
                                 product = "components")
