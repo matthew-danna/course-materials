@@ -19,7 +19,7 @@ variables.totals <- subset(variables, variables$label == 'Estimate!!Total:')
 # 2023 total population by state:
 pop23 <- get_acs(geography = "state",
                  variables = "B01003_001", 
-                 year = 2024)
+                 year = 2023)
 
 # 2023 total population by metropolitan statistical area:
 pop.msa.23 <- get_acs(geography = "metropolitan statistical area/micropolitan statistical area",
