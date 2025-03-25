@@ -6,7 +6,7 @@ library(corrplot)
 # Create a summary table of counts
 
 # Create a function for correlations
-corrplot2 <- function(data,
+correlation.function <- function(data,
                       method = "pearson",
                       sig.level = 0.05,
                       order = "original",
@@ -52,7 +52,7 @@ corrplot2 <- function(data,
 correlate.counts <- correlate(data)
 
 # Create a correlation chart
-corrplot2(
+correlation.function(
   data = data,
   method = "pearson",
   sig.level = 0.05, # adjust accordingly, 0.05 is the social science standard
