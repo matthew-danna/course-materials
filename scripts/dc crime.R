@@ -45,13 +45,13 @@ deployment_week <- as.numeric(format(as.Date("2025-08-11"), "%U"))
 
 ### Get weekly counts by Type
 crime.weekly <- dc.data %>%
-  filter(YEAR >= 2020 & YEAR <= 2025) %>%  # Keep only recent years
+  filter(YEAR >= 2019 & YEAR <= 2025) %>%  # Keep only recent years
   group_by(YEAR, WEEK, TYPE) %>%
   summarise(COUNT = n(), .groups = "drop")
 
 ### Get weekly counts by Offense
 crime.weekly.offense <- dc.data %>%
-  filter(YEAR >= 2020 & YEAR <= 2025) %>%
+  filter(YEAR >= 2019 & YEAR <= 2025) %>% # Keep only recent years
   group_by(YEAR, WEEK, OFFENSE) %>%
   summarise(COUNT = n(), .groups = "drop")
 
@@ -72,7 +72,7 @@ ggplot(crime.weekly, aes(x = WEEK, y = COUNT, color = as.factor(YEAR), group = Y
   geom_line(size = 1) +
   geom_vline(aes(xintercept = deployment_week, linetype = "National Guard"), 
              color = "black", size = 1) +
-  scale_linetype_manual("", values = c("National Guard Deployment" = "dashed")) +
+  scale_linetype_manual("", values = c("National Guard" = "dashed")) +
   facet_wrap(~ TYPE, scales = "free_y") +
   labs(
     title = "Weekly Crime Counts in DC",
@@ -92,7 +92,7 @@ ggplot(crime.weekly.offense, aes(x = WEEK, y = COUNT, color = as.factor(YEAR), g
   geom_line(size = 1) +
   geom_vline(aes(xintercept = deployment_week, linetype = "National Guard"), 
              color = "black", size = 1) +
-  scale_linetype_manual("", values = c("National Guard Deployment" = "dashed")) +
+  scale_linetype_manual("", values = c("National Guard" = "dashed")) +
   facet_wrap(~ OFFENSE, scales = "free_y") +
   labs(
     title = "Weekly Crime Counts in DC",
