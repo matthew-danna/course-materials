@@ -55,17 +55,6 @@ crime.weekly.offense <- dc.data %>%
   group_by(YEAR, WEEK, OFFENSE) %>%
   summarise(COUNT = n(), .groups = "drop")
 
-### Find average burglary count for 2020
-burglary_avg_2020 <- crime.weekly.offense %>%
-  filter(YEAR == 2020, OFFENSE == "BURGLARY", WEEK != 22) %>%
-  summarise(AVG_COUNT = mean(COUNT)) %>%
-  pull(AVG_COUNT)
-
-### Replace spike with average
-crime.weekly.offense <- crime.weekly.offense %>%
-  mutate(COUNT = ifelse(YEAR == 2020 & WEEK == 22 & OFFENSE == "BURGLARY",
-                        round(burglary_avg_2020), COUNT))
-
 # Step 3: Graphs
 ### Property vs Person
 ggplot(crime.weekly, aes(x = WEEK, y = COUNT, color = as.factor(YEAR), group = YEAR)) +
