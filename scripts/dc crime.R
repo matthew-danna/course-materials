@@ -49,12 +49,6 @@ crime.weekly <- dc.data %>%
   group_by(YEAR, WEEK, TYPE) %>%
   summarise(COUNT = n(), .groups = "drop")
 
-### Get weekly counts by Offense
-crime.weekly.offense <- dc.data %>%
-  filter(YEAR >= 2023 & YEAR <= 2025) %>% # Keep only recent years
-  group_by(YEAR, WEEK, OFFENSE) %>%
-  summarise(COUNT = n(), .groups = "drop")
-
 ### GET WEEKLY COUNTS BY WARD/DISTRICT
 
 # Step 3: Graphs
@@ -78,35 +72,14 @@ ggplot(crime.weekly, aes(x = WEEK, y = COUNT, color = as.factor(YEAR), group = Y
     strip.text = element_text(face = "bold", size = 12)
   )
 
-### By Offense
-ggplot(crime.weekly.offense, aes(x = WEEK, y = COUNT, color = as.factor(YEAR), group = YEAR)) +
-  geom_line(size = 1) +
-  geom_vline(aes(xintercept = deployment_week, linetype = "National Guard"), 
-             color = "black", size = 1) +
-  scale_linetype_manual("", values = c("National Guard" = "dashed")) +
-  facet_wrap(~ OFFENSE, scales = "free_y") +
-  labs(
-    title = "Weekly Crime Counts in DC",
-    subtitle = "By Specific Offense",
-    x = "Week of Year",
-    y = "Number of Incidents",
-    color = "Year"
-  ) +
-  theme_minimal(base_size = 14) +
-  theme(
-    legend.position = "right",
-    strip.text = element_text(face = "bold", size = 10)
-  )
-
 # Step 4: Before vs After by District
-#### change to WARDS!
 
 # Define deployment date
 deployment_date <- as.Date("2025-08-11")
 
 # Step 1: If not already aggregated, count incidents per date/district/crime type
 crime_daily <- dc.data %>%
-  group_by(DATE, DISTRICT, TYPE) %>%
+  group_by(DATE, WARD, TYPE) %>%
   summarise(COUNT = n(), .groups = "drop")
 
 # Step 2: Determine window length (balanced before/after)
@@ -127,7 +100,7 @@ days_per_period <- crime_window %>%
 
 # Step 5: Aggregate and normalize per day
 crime_summary <- crime_window %>%
-  group_by(PERIOD, DISTRICT, TYPE) %>%
+  group_by(PERIOD, WARD, TYPE) %>%
   summarise(TOTAL.CRIME = sum(COUNT, na.rm = TRUE), .groups = "drop") %>%
   left_join(days_per_period, by = "PERIOD") %>%
   mutate(avg_daily_crimes = TOTAL.CRIME / DAYS)
@@ -136,7 +109,7 @@ crime_summary <- crime_window %>%
 crime_summary$PERIOD <- factor(crime_summary$PERIOD, levels = c("Before", "After"))
 
 # Get all possible district numbers (assuming they're labeled like 1, 2, 3, ... 7)
-all_districts <- sort(unique(crime_window$DISTRICT))
+all_wards <- sort(unique(crime_window$WARD))
 
 # Create dynamic subtitle text
 subtitle_text <- paste0(
@@ -144,13 +117,17 @@ subtitle_text <- paste0(
   format(start_date, "%b %d, %Y"), " to ", format(end_date, "%b %d, %Y"), ")"
 )
 
-ggplot(crime_summary, aes(x = as.factor(DISTRICT), y = avg_daily_crimes, fill = PERIOD)) +
-  geom_bar(stat = "identity", position = position_dodge(width = 0.8)) +
+ggplot(crime_summary, aes(x = as.factor(WARD), 
+                          y = avg_daily_crimes, 
+                          fill = PERIOD)) +
+  geom_bar(stat = "identity", 
+           position = position_dodge(width = 0.8)) +
   facet_wrap(~TYPE, scales = "free_y") +
-  scale_x_discrete(limits = all_districts) +
-  scale_fill_manual(values = c("Before" = "#1f77b4", "After" = "#ff7f0e")) +
+  scale_x_discrete(limits = all_wards) +
+  scale_fill_manual(values = c("Before" = "#1f77b4", 
+                               "After" = "#ff7f0e")) +
   labs(
-    title = "Average Daily Person vs Property Crime by District",
+    title = "Average Daily Person vs Property Crime by Ward",
     subtitle = subtitle_text,
     x = "District",
     y = "Average Daily Crimes",
