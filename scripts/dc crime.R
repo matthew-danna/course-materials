@@ -129,7 +129,7 @@ ggplot(crime_summary, aes(x = as.factor(WARD),
   labs(
     title = "Average Daily Person vs Property Crime by Ward",
     subtitle = subtitle_text,
-    x = "District",
+    x = "Ward",
     y = "Average Daily Crimes",
     fill = "Time Period"
   ) +
