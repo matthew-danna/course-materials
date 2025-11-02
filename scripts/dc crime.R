@@ -26,6 +26,19 @@ dc.data$HOUR <- substr(dc.data$TIME, 0, 2)
 dc.data$WEEK <- format(as.Date(dc.data$DATE), "%U")
 dc.data$WEEK <- as.numeric(dc.data$WEEK)
 
+# Normalize week numbers (merge 0/53 weeks across years)
+dc.data <- dc.data %>%
+  mutate(
+    WEEK = as.numeric(format(DATE, "%U")),
+    YEAR = as.numeric(YEAR),
+    WEEK = case_when(
+      WEEK == 0 ~ 1,           # move week 0 to week 1
+      WEEK == 53 ~ 52,         # move week 53 to week 52
+      TRUE ~ WEEK
+    ),
+    WEEK = as.integer(WEEK)
+  )
+
 dc.data$TYPE <- case_when(
   dc.data$OFFENSE %in%
     c(
@@ -42,6 +55,24 @@ dc.data$TYPE <- case_when(
 # Step 2: Graph prep
 ### Dashed line for 2025-08-11
 deployment_week <- as.numeric(format(as.Date("2025-08-11"), "%U"))
+
+# Find the last date in your data
+latest_date <- max(dc.data$DATE, na.rm = TRUE)
+
+# Find the last full week end date (Sunday)
+# Assuming %U = weeks start on Sunday, we go back to the previous Saturday to end full weeks
+last_sunday <- latest_date - as.numeric(format(latest_date, "%w")) # %w: 0=Sunday,6=Saturday
+if (latest_date > last_sunday) {
+  # If the latest data isn’t a Sunday, trim back to the previous Saturday (end of last full week)
+  cutoff_date <- last_sunday - 1
+} else {
+  # Otherwise, we’re exactly on a Sunday — include that week
+  cutoff_date <- latest_date
+}
+
+# Filter to only include complete weeks
+dc.data <- dc.data %>%
+  filter(DATE <= cutoff_date)
 
 ### Get weekly counts by Type
 crime.weekly <- dc.data %>%
