@@ -3,7 +3,7 @@ library(tidyverse) # run this every session
 
 # Step 1: Data
 url <- "https://opendata.dc.gov/datasets/DCGIS::crime-incidents-in-"
-years <- c(2008:2025)
+years <- c(2015:2025)
 full.urls <- paste0(url, years, ".csv")
 dc.data <- data.frame()
 
